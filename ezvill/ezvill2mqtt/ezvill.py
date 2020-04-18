@@ -23,7 +23,7 @@ def do_work(config, device_list):
     mqtt_log = config['mqtt_log']
     elfin_log = config['elfin_log']
     data_prefix = config['data_prefix']
-    seperator_startnum = device_list['seperator']['startnum']
+    seperator_startnum = device_list['seperator']['startNUM']
     seperator_length = device_list['seperator']['length']
     
     DEVICE_LISTS = device_list.remove('seperatorSTARTNUM')
