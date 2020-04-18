@@ -23,9 +23,9 @@ def do_work(config, device_list):
     mqtt_log = config['mqtt_log']
     elfin_log = config['elfin_log']
     data_prefix = config['data_prefix']
-    device_startnum = device_list['deviceSTARTNUM']
+    seperator_startnum = device_list['seperatorSTARTNUM']
     
-    DEVICE_LISTS = device_list.remove('devicSTARTNUM')
+    DEVICE_LISTS = device_list.remove('seperatorSTARTNUM')
     seperator_list = {DEVICE_LISTS[name]['deviceSEPERATOR']: name for name in DEVICE_LISTS}
     log('----------------------')
     log('Registered device lists..')
