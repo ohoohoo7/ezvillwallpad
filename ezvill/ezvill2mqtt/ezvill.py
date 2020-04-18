@@ -23,25 +23,8 @@ def do_work(config, device_list):
     mqtt_log = config['mqtt_log']
     elfin_log = config['elfin_log']
     data_prefix = config['data_prefix']
-        
-    """def make_device_info(device):
-        num = device.get('Number')
-        seperator = device.get('deviceSEPERATOR')
-        arr = {cmd + onoff: device.get(cmd + onoff) for cmd in ['command', 'state'] for onoff in ['ON', 'OFF']}
-        arr['Num'] = num
-        arr['seperator'] = seperator
-        arr['seperatorstartnum'] = device.get('seperatorSTARTNUM')
-        if num > 1:
-        	for k in range(num):
-        		arr['statenum{}'.format(k+1)] = device.get('statenum{}'.format(k+1))
-        return arr"""
-    
-    DEVICE_LISTS = device_list #{}
-    #for name in device_list:
-        #device_info = make_device_info(device_list[name])
-        #if device_info:
-        #    DEVICE_LISTS[name] = device_info
-   
+           
+    DEVICE_LISTS = device_list #{} 
     seperator_list = {DEVICE_LISTS[name]['deviceSEPERATOR']: name for name in DEVICE_LISTS}
     log('----------------------')
     log('Registered device lists..')
@@ -87,17 +70,15 @@ def do_work(config, device_list):
                         device_name = seperator_list[device_seperator]
                         num = DEVICE_LISTS[device_name]['Number']
                         if num == 1:
-                            #state = [DEVICE_LISTS[device_name]['stateOFF']] + [DEVICE_LISTS[device_name]['stateON']]
                             fulldata = data_prefix + data[kk]
                             if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
-                                #index = state.index(fulldata)
-                                #onoff, index = ['OFF', index] if index < num else ['ON', index - num]
                                 await update_state(device_name, 'OFF')
                             elif fulldata == DEVICE_LISTS[device_name]['stateON']:
                             	await update_state(device_name, 'ON')
                         else:
                             for kkk in range(num):
-                                if data[kk][int(DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)])-len(data_prefix)-1] == '0':
+                                log('[DEBUG] data[kk][DEVOCE_LISTS[]: {}'.format(data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1]))
+                                if data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == '0':
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
                                 else:
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'ON')
