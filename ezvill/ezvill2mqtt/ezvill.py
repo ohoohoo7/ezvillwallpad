@@ -26,7 +26,9 @@ def do_work(config, device_list):
     seperator_startnum = device_list['seperator']['startNUM']
     seperator_length = device_list['seperator']['length']
     
-    DEVICE_LISTS = device_list.remove('seperatorSTARTNUM')
+    DEVICE_LISTS = device_list
+    del DEVICE_LISTS['seperator']
+
     seperator_list = {DEVICE_LISTS[name]['deviceSEPERATOR']: name for name in DEVICE_LISTS}
     log('----------------------')
     log('Registered device lists..')
