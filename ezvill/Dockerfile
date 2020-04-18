@@ -6,7 +6,7 @@ ENV TZ=Asia/Seoul
 # Copy data for add-on
 COPY run.sh /
 COPY ezvill2mqtt /ezvill2mqtt
-#COPY ezvill2mqtt/ezvill_devinfo.json /share/ezvill_devinfo.json
+COPY ezvill2mqtt/ezvill_devinfo.json /share/ezvill_devinfo.json
 
 # Install requirements for add-on
 RUN pip install paho-mqtt
