@@ -98,7 +98,7 @@ def do_work(config, device_list):
                             	await update_state(device_name, 'ON')
                         else:
                         	for kkk in range(num):
-                                if data[kk][int(DEVICE_LIST[device_name]['stateNUM{}'.format(kkk+1)])-len(data_prefix)-1] == '0':
+                                if data[kk][int(DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)])-len(data_prefix)-1] == '0':
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
                                 else:
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'ON')
