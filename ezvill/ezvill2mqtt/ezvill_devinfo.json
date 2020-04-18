@@ -2,7 +2,7 @@
   "seperator": {
     "startNUM": 5,
     "length": 4
-  } 
+  }, 
   "room1": {
     "Number": 1,
     "commandOFF": "F70E124103010000A804",
