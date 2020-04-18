@@ -16,8 +16,8 @@
     "elfin_log": false,
     "mqtt_server": "192.168.x.x",
     "mqtt_id": "id",
-    "mqtt_password": "pwd"
-    "prefix": "prf"
+    "mqtt_password": "pwd",
+    "prefix": "F7"
   },
   "schema": {
     "DEBUG": "bool",
@@ -25,7 +25,7 @@
     "elfin_log": "bool",
     "mqtt_server": "str",
     "mqtt_id": "str",
-    "mqtt_password": "str"
+    "mqtt_password": "str",
     "prefix": "str"
   }
 }
