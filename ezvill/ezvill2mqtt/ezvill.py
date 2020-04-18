@@ -136,7 +136,7 @@ def do_work(config, device_list):
             if topics[0] == HA_TOPIC and topics[-1] == 'command':
                 asyncio.run(recv_from_HA(topics, msg.payload.decode('utf-8')))
             elif topics[0] == ELFIN_TOPIC and topics[-1] == 'recv':
-                asyncio.run(recv_from_elfin(msg.payload.hex().upper().split(data_seperator)))
+                asyncio.run(recv_from_elfin(msg.payload.hex().upper().split(data_prefix)))
         except:
             pass
 
