@@ -1,10 +1,13 @@
 {
+  "seperator": {
+    "startNUM": 5,
+    "length": 4
+  } 
   "room1": {
     "Number": 1,
     "commandOFF": "F70E124103010000A804",
     "commandON": "F70E124103010100A906",
     "deviceSEPERATOR": "1281",
-    "seperatorSTARTNUM": 5,
     "stateOFF": "F70E12810200006802",
     "stateON": "F70E12810200016904"
   },
@@ -13,7 +16,6 @@
     "commandOFF": "F70E134103010000A906",
     "commandON": "F70E134103010100A806",
     "deviceSEPERATOR": "1381",
-    "seperatorSTARTNUM": 5,
     "stateOFF": "F70E13810200006904",
     "stateON": "F70E13810200016804"
   },
@@ -22,7 +24,6 @@
     "commandOFF": "F70E144103010000AE0C",
     "commandON": "F70E144103010100AF0E",
     "deviceSEPERATOR": "1481",
-    "seperatorSTARTNUM": 5,
     "stateOFF": "F70E14810200006E0A",
     "stateON": "F70E14810200016F0C"
   },
@@ -31,7 +32,6 @@
     "commandOFF": "F70E154103010000AF0E",
     "commandON": "F70E154103010100AE0E",
     "deviceSEPERATOR": "1581",
-    "seperatorSTARTNUM": 5,
     "stateOFF": "F70E15810200006F0C",
     "stateON": "F70E15810200016E0C"
   },
@@ -40,7 +40,6 @@
     "commandOFF": "F70E114103010000AB06",
     "commandON": "F70E114103010100AA06",
     "deviceSEPERATOR": "1181",
-    "seperatorSTARTNUM": 5,
     "stateNUM1": 14,
     "stateNUM2": 16,
     "stateNUM3": 18,
@@ -52,7 +51,6 @@
     "commandOFF": "F70E114103020000A804",
     "commandON": "F70E114103020100A906",
     "deviceSEPERATOR": "1181",
-    "seperatorSTARTNUM": 5,
     "stateNUM1": 14,
     "stateNUM2": 16,
     "stateNUM3": 18,
@@ -64,7 +62,6 @@
     "commandOFF": "F70E114103030000A906",
     "commandON": "F70E114103030100A806",
     "deviceSEPERATOR": "1181",
-    "seperatorSTARTNUM": 5,
     "stateNUM1": 14,
     "stateNUM2": 16,
     "stateNUM3": 18,
