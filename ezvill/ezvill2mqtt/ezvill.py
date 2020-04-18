@@ -50,7 +50,7 @@ def do_work(config, device_list):
 
     HOMESTATE = {}
     QUEUE = []
-    COLLECTDATA = {'cond': find_signal, 'data': [], 'EVtime': time.time(), 'LastRecv': time.time_ns()}
+    COLLECTDATA = {'data': [], 'EVtime': time.time(), 'LastRecv': time.time_ns()}
 
     async def recv_from_HA(topics, value):
         key = topics[1] + topics[2]
