@@ -37,7 +37,7 @@ def do_work(config, device_list):
         return arr"""
     
     DEVICE_LISTS = device_list #{}
-    for name in device_list:
+    #for name in device_list:
         #device_info = make_device_info(device_list[name])
         #if device_info:
         #    DEVICE_LISTS[name] = device_info
