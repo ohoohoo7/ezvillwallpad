@@ -1,7 +1,7 @@
 {
   "name": "EZvill to MQTT",
   "version": "1.0.0",
-  "slug": "commax_mqtt2elfin_python",
+  "slug": "ezvill",
   "url": "https://github.com/ohoohoo7/wallpad",
   "description": "이지빌 월패드 조명 제어를 mqtt로 가능하게하는 HA 애드온",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
