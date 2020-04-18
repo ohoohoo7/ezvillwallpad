@@ -177,7 +177,7 @@ def do_work(config, device_list):
 if __name__ == '__main__':
     with open(config_dir + '/options.json') as file:
         CONFIG = json.load(file)
-    with open(share_dir + '/evill_devinfo.json') as file:
+    with open(share_dir + '/ezvill_devinfo.json') as file:
         log('Found device data: /share/ezvill_devinfo.json')
         OPTION = json.load(file)
     while True:
