@@ -54,8 +54,7 @@ def do_work(config, device_list):
 
     async def recv_from_HA(topics, value):
         key = topics[1] + topics[2]
-        device = topics[1][:-1]
-        idx = int(topics[1][-1])
+        device = topics[1]
         if mqtt_log:
             log('[LOG] HA >> MQTT : {} -> {}'.format('/'.join(topics), value))
         try:
