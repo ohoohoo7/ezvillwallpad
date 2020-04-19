@@ -2,6 +2,7 @@
 ==========================================================
 다음의 특징을 가집니다.
 1. 사람님의 코맥스월패드용 애드온을 참고로 이지빌에 맞게 수정 (자동으로 기기 찾는기능 삭제하고 전등만 제어가능)
+ 사람님 github (https://githubs.com/kimtc99/wallpad)
 2. elfin ew11에 mqtt 통신 설정을 해야 합니다. (아래 스크린샷 참고)
 
 설치전 준비사항
@@ -27,7 +28,6 @@
 "DEBUG": false,
 "mqtt_log": true,
 "elfin_log": false,
-"save_unregistered_signal": false,
 "mqtt_server": "192.168.x.x",
 "mqtt_id": "id",
 "mqtt_password": "pwd"
@@ -40,16 +40,13 @@
 MQTT 전송 신호를 출력합니다.
 #### elfin_log : true / false
 ew11을 통해 보내거나 받은 신호를 출력합니다.
-#### save_unregistered_signal : true / false
-등록되지 않은 신호 20개를 출력하고, /share/collected_signal.txt 에 저장합니다.
-
 #### mqtt_server : 문자
 mqtt 서버의 IP 주소를 적습니다. ex) 192.168.0.2
 #### mqtt_id : 문자
 mqtt 서버 사용자의 아이디를 적습니다.
-#### mqtt_password": 문자
+#### mqtt_password : 문자
 mqtt 서버 사용자의 암호를 적습니다. 숫자암호인 경우 꼭 따옴표 "1234"를 해주세요.
-#### data_prefix": 문자
+#### data_prefix : 문자
 이지빌의 조명제어용 HEX코드의 맨 앞글자 2개 입력(표준상 일반적으로 F7)
 
 기기 정보 파일 (ezvill_devinfo.json) 사용법
@@ -61,12 +58,15 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
 -----------------------
 <pre><code>
 {
+  "seperator": {
+    "startNUM": 5,
+    "length": 4
+  }, 
   "room1": {
     "Number": 1,
     "commandOFF": "F70E124103010000A804",
     "commandON": "F70E124103010100A906",
     "deviceSEPERATOR": "1281",
-    "seperatorSTARTNUM" "5",
     "stateOFF": "F70E12810200006802",
     "stateON": "F70E12810200016904"
   },
@@ -75,7 +75,6 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
     "commandOFF": "F70E134103010000A906",
     "commandON": "F70E134103010100A806",
     "deviceSEPERATOR": "1381",
-    "seperatorSTARTNUM" "5",
     "stateOFF": "F70E13810200006904",
     "stateON": "F70E13810200016804"
   },
@@ -84,7 +83,6 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
     "commandOFF": "F70E144103010000AE0C",
     "commandON": "F70E144103010100AF0E",
     "deviceSEPERATOR": "1481",
-    "seperatorSTARTNUM" "5",
     "stateOFF": "F70E14810200006E0A",
     "stateON": "F70E14810200016F0C"
   },
@@ -93,7 +91,6 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
     "commandOFF": "F70E154103010000AF0E",
     "commandON": "F70E154103010100AE0E",
     "deviceSEPERATOR": "1581",
-    "seperatorSTARTNUM" "5",
     "stateOFF": "F70E15810200006F0C",
     "stateON": "F70E15810200016E0C"
   },
@@ -102,10 +99,9 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
     "commandOFF": "F70E114103010000AB06",
     "commandON": "F70E114103010100AA06",
     "deviceSEPERATOR": "1181",
-    "seperatorSTARTNUM" "5",
-    "stateNUM1": "14",
-    "stateNUM2": "16",
-    "stateNUM3": "17",
+    "stateNUM1": 14,
+    "stateNUM2": 16,
+    "stateNUM3": 18,
     "stateOFF": "0",
     "stateON": "1"
   },
@@ -114,10 +110,9 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
     "commandOFF": "F70E114103020000A804",
     "commandON": "F70E114103020100A906",
     "deviceSEPERATOR": "1181",
-    "seperatorSTARTNUM" "5",
-    "stateNUM1": "14",
-    "stateNUM2": "16",
-    "stateNUM3": "17",
+    "stateNUM1": 14,
+    "stateNUM2": 16,
+    "stateNUM3": 18,
     "stateOFF": "0",
     "stateON": "1"
   },
@@ -126,10 +121,9 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
     "commandOFF": "F70E114103030000A906",
     "commandON": "F70E114103030100A806",
     "deviceSEPERATOR": "1181",
-    "seperatorSTARTNUM" "5",
-    "stateNUM1": "14",
-    "stateNUM2": "16",
-    "stateNUM3": "17",
+    "stateNUM1": 14,
+    "stateNUM2": 16,
+    "stateNUM3": 18,
     "stateOFF": "0",
     "stateON": "1"
   }
@@ -139,22 +133,25 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
 기기 정보 파일 (ezvill_devinfo.json) 옵션 설명
 ---------------------------------------------
 ### 기본 기기 옵션
-1. Number : 전등종류 분류 (개별동작등의 경우 1, 거실등과 같이 집합등의 경우 등의 갯수)
+1. "seperator" 항목 : 각 기기의 상태코드에서 기기를 구분해줄 수 있는 부분의 코드를 deviceSEPERATOR값에 저장하는데 그 코드의 공동정보를 작성
+ 1-1. startNUM : deviceSEPERATOR 코드가 시작되는 곳의 자리수
+ 1-2. length : deviceSEPERATOR 코드의 길이
+ 예) 전등1 상태코드가 F711810300 이고 전등2가 F712810300 전등3가 F713810300 일때 기기를 구분해줄수 있는 deviceSEPERATOR 코드는 
+     각각 181, 281,  381이 될수 있고 코드 시작 위치인 startNUM은 3 length는 3이 된다
+2. Number : 전등종류 분류 (개별동작등의 경우 1, 거실등과 같이 집합등의 경우 등의 갯수)
  - Number가 #이면 같은이름의 기기항목이 "이름#" 형태로 #개 존재해야하며 "stateNUM#" 항목도 #개 존재해야함 
-  예) 기기room의 Number가 3이면 기기명 room1, room2, room3 에 각각 stateNUM1, stateNUM2,stateNUM3 이 존재해야함
-2. commandOFF, commandON : 기기를 켜거나 끄는 HEX 코드
-3. deviceSEPERATOR : 상태HEX에서 다른기기와 구별되는 시리얼 코드
-4. seperatorSTARTNUM : deviceSEPERATOR 가 HEX에서 시작되는 자리수
+  예) 기기room의 Number가 3이면 기기명 room1, room2, room3 에 각각 stateNUM1, stateNUM2, stateNUM3이 존재해야함
+3. commandOFF, commandON : 기기를 켜거나 끄는 HEX 코드
+4. deviceSEPERATOR : 기기상태 HEX에서 다른기기와 구별되는 코드 
 5. statueNUM# : 집합등의 경우 HEX코드 한개로 여러등의 상태를 나타내므로 집합등의 상태를 나타내주는 HEX코드에서 각등의 상태를 표시해주는 곳의 자리수
- 예) 1번등 이 14번째 2번등이 16번째이면 "stateNUM1" : "14", "stateNUM2": "16"
 6. stateOFF, stateON : 기기의 상태를 알려주는 HEX 코드 (집합등의 HEX코드 한개로 여러등의 상태를 나타내므로 집합등의 상태를 나타내주는 HEX코드에서 각등의 상태를 표시해주는 곳의 값)
+ 예)  집합등의 상태코드가 F7108103000000 이고 1번등 상태표시가 10번째코드 (ON : 1, OFF: 0), 2번등 상태표시가 12번째코드 (ON : 1, OFF: 0), 3번등 상태표시가 14번째 코드 (ON : 1, OFF: 0) 일때 stateNUM1: 10, stateNUM2: 12, stateNUM1: 14, stateOFF: '0', stateON: '1' 이 된다.
 
 
 기기 등록 예
 ------------
 
 <pre><code>
-
 light:
   - platform: mqtt
     name: "거실등1"
@@ -164,5 +161,4 @@ light:
     name: "거실등2"
     state_topic: "homenet/Light2/power/state"
     command_topic: "homenet/Light2/power/command"
-
 </code></pre>
