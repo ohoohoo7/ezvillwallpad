@@ -81,7 +81,6 @@ def do_work(config, device_list):
                             	await update_state(device_name, 'ON')
                         else:
                             for kkk in range(num):
-                                log('[DEBUG] data[kk][DEVOCE_LISTS[]: {}'.format(data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1]))
                                 if data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateOFF']:
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
                                 elif data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateON']:
