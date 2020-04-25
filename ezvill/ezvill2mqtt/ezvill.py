@@ -37,7 +37,7 @@ def do_work(config, device_list):
 
     HOMESTATE = {}
     QUEUE = []
-    COLLECTDATA = {'data': [], 'EVtime': time.time(), 'LastRecv': time.time_ns()}
+    COLLECTDATA = {'data': [], 'LastRecv': time.time_ns()}
 
     async def recv_from_HA(topics, value):
         key = topics[1] + topics[2]
@@ -88,8 +88,7 @@ def do_work(config, device_list):
 
     async def update_state(device, onoff):
         state = 'power'
-        deviceID = device
-        key = deviceID + state
+        key = device + state
 
         if onoff != HOMESTATE.get(key):
             HOMESTATE[key] = onoff
