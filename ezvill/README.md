@@ -154,11 +154,11 @@ share 폴더에 기기 정보 파일 ezvill_devinfo.json을 자기집 사정에 
 <pre><code>
 light:
   - platform: mqtt
-    name: "거실등1"
-    state_topic: "homenet/Light1/power/state"
-    command_topic: "homenet/Light1/power/command"
+    name: "안방등"
+    state_topic: "ezvill/room1/power/state"
+    command_topic: "ezvill/room1/power/command"
   - platform: mqtt
-    name: "거실등2"
-    state_topic: "homenet/Light2/power/state"
-    command_topic: "homenet/Light2/power/command"
+    name: "옷방등"
+    state_topic: "ezvill/room2/power/state"
+    command_topic: "ezvill/room2/power/command"
 </code></pre>
