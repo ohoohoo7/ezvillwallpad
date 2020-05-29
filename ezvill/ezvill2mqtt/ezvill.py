@@ -96,13 +96,13 @@ def do_work(config, device_list):
         log('num: {}'.format(HOMESTATE.get(key)))
         if onoff != HOMESTATE.get(key):
             HOMESTATE[key] = onoff
-            topic = STATE_TOPIC.format(deviceID, state)
+            topic = STATE_TOPIC.format(device, state)
             mqtt_client.publish(topic, onoff.encode())
             if mqtt_log:
                 log('[LOG] MQTT >> HA : {} >> {}'.format(topic, onoff))
         else:
             if debug:
-                log('[DEBUG] {} is already set: {}'.format(deviceID, onoff))
+                log('[DEBUG] {} is already set: {}'.format(device, onoff))
         return
 
     def on_connect(client, userdata, flags, rc):
