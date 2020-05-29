@@ -86,8 +86,10 @@ def do_work(config, device_list):
                         else:
                             for kkk in range(num):
                                 if data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateOFF']:
+                                    log('num: {}'.format(device_name[:-1]))
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
                                 elif data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateON']:
+                                    log('num: {}'.format(device_name[:-1]))
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'ON')
 
     async def update_state(device, onoff):
