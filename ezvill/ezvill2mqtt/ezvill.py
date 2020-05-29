@@ -92,7 +92,8 @@ def do_work(config, device_list):
         state = 'power'
         key = device + state
         log('num: {}'.format(key))
-
+        log('num: {}'.format(onoff))
+        log('num: {}'.format(HOMESTATE.get(key)))
         if onoff != HOMESTATE.get(key):
             HOMESTATE[key] = onoff
             topic = STATE_TOPIC.format(deviceID, state)
