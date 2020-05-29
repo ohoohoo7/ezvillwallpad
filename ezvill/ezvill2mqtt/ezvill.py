@@ -78,23 +78,20 @@ def do_work(config, device_list):
                         if num == 1:
                             fulldata = data_prefix + data[kk]
                             if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
-                                log('num: {}'.format(fulldata))
                                 await update_state(device_name, 'OFF')
                             elif fulldata == DEVICE_LISTS[device_name]['stateON']:
-                                log('num: {}'.format(fulldata))
                                 await update_state(device_name, 'ON')
                         else:
                             for kkk in range(num):
                                 if data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateOFF']:
-                                    log('num: {}'.format(device_name[:-1]))
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
                                 elif data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateON']:
-                                    log('num: {}'.format(device_name[:-1]))
                                     await update_state(device_name[:-1]+'{}'.format(kkk+1), 'ON')
 
     async def update_state(device, onoff):
         state = 'power'
         key = device + state
+        log('num: {}'.format(key))
 
         if onoff != HOMESTATE.get(key):
             HOMESTATE[key] = onoff
