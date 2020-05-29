@@ -73,8 +73,7 @@ def do_work(config, device_list):
                     if device_seperator in seperator_list:
                         device_name = seperator_list[device_seperator]
                         num = DEVICE_LISTS[device_name]['Number']
-                        log('devicename: {}'.format(device_name))
-                        log('num: {}'.format(num))
+
                         if num == 1:
                             fulldata = data_prefix + data[kk]
                             if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
@@ -91,9 +90,7 @@ def do_work(config, device_list):
     async def update_state(device, onoff):
         state = 'power'
         key = device + state
-        log('num: {}'.format(key))
-        log('num: {}'.format(onoff))
-        log('num: {}'.format(HOMESTATE.get(key)))
+        
         if onoff != HOMESTATE.get(key):
             HOMESTATE[key] = onoff
             topic = STATE_TOPIC.format(device, state)
