@@ -123,7 +123,7 @@ def do_work(config, device_list):
         except:
             pass
 
-    mqtt_client = mqtt.Client('commax-mqtt2elfin-python')
+    mqtt_client = mqtt.Client('ezvill2mqtt')
     mqtt_client.username_pw_set(config['mqtt_id'], config['mqtt_password'])
     mqtt_client.on_connect = on_connect
     mqtt_client.on_message = on_message
