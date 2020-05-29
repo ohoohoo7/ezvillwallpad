@@ -68,9 +68,9 @@ def do_work(config, device_list):
             if elfin_log:
                 log('[SIGNAL] receved: {}'.format(data))
             if len(data) > 2:
-                log('[SIGNAL] receved: {}'.format(len(data)))
                 for kk in range(len(data)):
                     device_seperator = data[kk][seperator_startnum-len(data_prefix)-1:seperator_length+seperator_startnum-len(data_prefix)-1]
+                    log('data: {}'.format(len(device_seperator)))
                     if device_seperator in seperator_list:
                         device_name = seperator_list[device_seperator]
                         num = DEVICE_LISTS[device_name]['Number']
