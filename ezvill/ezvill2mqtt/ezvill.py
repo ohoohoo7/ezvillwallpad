@@ -70,15 +70,18 @@ def do_work(config, device_list):
             if len(data) > 2:
                 for kk in range(len(data)):
                     device_seperator = data[kk][seperator_startnum-len(data_prefix)-1:seperator_length+seperator_startnum-len(data_prefix)-1]
-                    log('data: {}'.format(device_seperator))
                     if device_seperator in seperator_list:
                         device_name = seperator_list[device_seperator]
                         num = DEVICE_LISTS[device_name]['Number']
+                        log('devicename: {}'.format(device_name))
+                        log('num: {}'.format(num))
                         if num == 1:
                             fulldata = data_prefix + data[kk]
                             if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
+                                log('num: {}'.format(fulldata))
                                 await update_state(device_name, 'OFF')
                             elif fulldata == DEVICE_LISTS[device_name]['stateON']:
+                                log('num: {}'.format(fulldata))
                             	await update_state(device_name, 'ON')
                         else:
                             for kkk in range(num):
