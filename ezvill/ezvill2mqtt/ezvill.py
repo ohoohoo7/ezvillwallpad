@@ -65,9 +65,9 @@ def do_work(config, device_list):
     async def recv_from_elfin(data):
         COLLECTDATA['LastRecv'] = time.time_ns()
         if data:
-            if HOMESTATE.get('EVpower') == 'ON':
-                if COLLECTDATA['EVtime'] < time.time():
-                    await update_state('EV', 'OFF')
+            #if HOMESTATE.get('EVpower') == 'ON':
+            #    if COLLECTDATA['EVtime'] < time.time():
+            #        await update_state('EV', 'OFF')
             if elfin_log:
                 log('[SIGNAL] receved: {}'.format(data))
             if len(data) > 2:
@@ -75,9 +75,12 @@ def do_work(config, device_list):
                     device_seperator = data[kk][seperator_startnum-len(data_prefix)-1:seperator_length+seperator_startnum-len(data_prefix)-1]
                     if device_seperator in seperator_list:
                         device_name = seperator_list[device_seperator]
-                        if device_name == 'EV':
-                            await update_state('EV', 'ON')
-                            COLLECTDATA['EVtime'] = time.time() + 3
+                        if device_name == 'EV':   
+                            fulldata = data_prefix + data[kk]
+                            if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
+                                await update_state(device_name, 'OFF')
+                            elif fulldata == DEVICE_LISTS[device_name]['stateON']:
+                                await update_state(device_name, 'ON')
                         else:
                             num = DEVICE_LISTS[device_name]['Number']
 
