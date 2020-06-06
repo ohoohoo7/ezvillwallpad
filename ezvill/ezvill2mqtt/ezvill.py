@@ -66,8 +66,8 @@ def do_work(config, device_list):
         COLLECTDATA['LastRecv'] = time.time_ns()
         if data:
             if HOMESTATE.get('EVpower') == 'ON':
-                if COLLECTDATA['EVtime'] < time.time():
-                    await update_state('EV', 'OFF')
+                #if COLLECTDATA['EVtime'] < time.time():
+                await update_state('EV', 'OFF')
             if elfin_log:
                 log('[SIGNAL] receved: {}'.format(data))
             if len(data) > 2:
@@ -77,7 +77,7 @@ def do_work(config, device_list):
                         device_name = seperator_list[device_seperator]
                         if device_name == 'EV':
                             await update_state('EV', 'ON')
-                            COLLECTDATA['EVtime'] = time.time() + 3
+                            #COLLECTDATA['EVtime'] = time.time() + 3
                         else:
                             num = DEVICE_LISTS[device_name]['Number']
 
