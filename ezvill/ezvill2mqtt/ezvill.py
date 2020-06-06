@@ -37,7 +37,7 @@ def do_work(config, device_list):
 
     HOMESTATE = {}
     QUEUE = []
-    COLLECTDATA = {'data': [], 'LastRecv': time.time_ns()}
+    COLLECTDATA = {'data': [], 'EVtime': time.time()', LastRecv': time.time_ns()}
 
     async def recv_from_HA(topics, value):
         key = topics[1] + topics[2]
@@ -65,6 +65,9 @@ def do_work(config, device_list):
     async def recv_from_elfin(data):
         COLLECTDATA['LastRecv'] = time.time_ns()
         if data:
+            if HOMESTATE.get('EVpower') == 'ON':
+                if COLLECTDATA['EVtime'] < time.time():
+                    await update_state('EV', 'OFF')
             if elfin_log:
                 log('[SIGNAL] receved: {}'.format(data))
             if len(data) > 2:
@@ -72,20 +75,24 @@ def do_work(config, device_list):
                     device_seperator = data[kk][seperator_startnum-len(data_prefix)-1:seperator_length+seperator_startnum-len(data_prefix)-1]
                     if device_seperator in seperator_list:
                         device_name = seperator_list[device_seperator]
-                        num = DEVICE_LISTS[device_name]['Number']
-
-                        if num == 1:
-                            fulldata = data_prefix + data[kk]
-                            if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
-                                await update_state(device_name, 'OFF')
-                            elif fulldata == DEVICE_LISTS[device_name]['stateON']:
-                                await update_state(device_name, 'ON')
+                        if device_name == 'EV':
+                            await update_state('EV', 'ON')
+                            COLLECTDATA['EVtime'] = time.time() + 3
                         else:
-                            for kkk in range(num):
-                                if data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateOFF']:
-                                    await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
-                                elif data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateON']:
-                                    await update_state(device_name[:-1]+'{}'.format(kkk+1), 'ON')
+                            num = DEVICE_LISTS[device_name]['Number']
+
+                            if num == 1:
+                                fulldata = data_prefix + data[kk]
+                                if fulldata == DEVICE_LISTS[device_name]['stateOFF']:
+                                    await update_state(device_name, 'OFF')
+                                elif fulldata == DEVICE_LISTS[device_name]['stateON']:
+                                    await update_state(device_name, 'ON')
+                            else:
+                                for kkk in range(num):
+                                    if data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateOFF']:
+                                        await update_state(device_name[:-1]+'{}'.format(kkk+1), 'OFF')
+                                    elif data[kk][DEVICE_LISTS[device_name]['stateNUM{}'.format(kkk+1)]-len(data_prefix)-1] == DEVICE_LISTS[device_name]['stateON']:
+                                        await update_state(device_name[:-1]+'{}'.format(kkk+1), 'ON')
 
     async def update_state(device, onoff):
         state = 'power'
