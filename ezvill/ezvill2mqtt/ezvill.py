@@ -140,12 +140,12 @@ def do_work(config, device_list):
                         log('[SIGNAL] Send a signal: {}'.format(send_data))
                     mqtt_client.publish(ELFIN_SEND_TOPIC, bytes.fromhex(send_data['sendcmd']))
                     await asyncio.sleep(0.1)
-                    if send_data['count'] < 3:
+                    if send_data['count'] < 5:
                         send_data['count'] = send_data['count'] + 1
                         QUEUE.append(send_data)
                     else:
                         if elfin_log:
-                            log('[SIGNAL] Send over 3 times. Send Failure. Delete a queue: {}'.format(send_data))
+                            log('[SIGNAL] Send over 5 times. Send Failure. Delete a queue: {}'.format(send_data))
             except Exception as err:
                 log('[ERROR] send_to_elfin(): {}'.format(err))
                 return True
